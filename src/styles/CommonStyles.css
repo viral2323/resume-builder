@@ -1,0 +1,46 @@
+
+.personal-block-wrapper{
+    border: 1px solid gray;
+}
+.education-block-wrapper{
+    border: 1px solid gray;
+}
+
+.custom-checkbox{
+    width: 18px;
+    height: 18px
+}
+
+.skill-tag-wrapper{
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+}
+.tag{
+    display: inline-block;
+    background-color: #fa0e7e;
+    color: white;
+    border-radius: 40px;
+    padding: 2px 5px 2px 5px;
+    margin-right: 5px;
+    margin-bottom: 5px
+}
+.remove-tag{
+    background-color: transparent;
+    border: 1px solid black;
+    color: white;
+    margin: 0;
+    margin-left: 4px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 0;
+}
+
+.remove-tag:focus{
+    border: 1px solid black;
+}
