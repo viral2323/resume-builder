@@ -1,4 +1,10 @@
 
+.form-wrapper{
+    padding: 4rem 5rem 4rem;
+}
+.resume-title{
+    font-size: 4rem;
+}
 .personal-block-wrapper{
     border: 1px solid gray;
 }
@@ -6,26 +12,73 @@
     border: 1px solid gray;
 }
 
-.custom-checkbox{
-    width: 18px;
-    height: 18px
+.block-title{
+    font-size: 2.4rem;
 }
 
+.custom-input{
+    height: 40px;
+    border: 1px solid #2986d6;
+    caret-color: #2986d6;
+    font-size: 1.2rem;
+}
+.custom-input::placeholder {
+    color: #2986d6;
+}
+.custom-input:focus, .custom-input:focus-within, .custom-input:focus-visible{
+    outline: none;
+    box-shadow: 0px 0px 2px 2px #708ca3;
+}
+
+.field-wrapper{
+    width: 49%;
+}
+.wrapper{
+    column-gap: 2%;
+}
+.custom-label{
+    font-size: 1.5rem;
+    color: #2986d6;
+}
+.custom-checkbox{
+    width: 22px;
+    height: 22px
+}
+
+.custom-button{
+    border: 2px solid #2986d6;
+    font-size: 1.3rem;
+    color: #2986d6;
+}
+
+.custom-button:focus, .custom-button:focus-visible, .custom-button:focus-within{
+    outline: none;
+    box-shadow: 0px 0px 2px 2px #708ca3;
+}
+
+.submit-button{
+    border: 2px solid #2986d6;
+    font-size: 1.6rem;
+    color: #2986d6;
+}
+
+.submit-button:focus, .submit-button:focus-visible, .submit-button:focus-within{
+    outline: none;
+    box-shadow: 0px 0px 2px 2px #708ca3;
+}
 .skill-tag-wrapper{
-    background: #f9f9f9;
     padding: 10px;
     border-radius: 4px;
-    max-width: 400px;
-    border: 1px solid #ccc;
+    border: 1px solid #2986d6;
 }
 .tag{
     display: inline-block;
-    background-color: #fa0e7e;
+    background: linear-gradient(112deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(41,134,214,0.6362920168067228) 100%);;
     color: white;
-    border-radius: 40px;
     padding: 2px 5px 2px 5px;
     margin-right: 5px;
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    font-size: 1rem;
 }
 .remove-tag{
     background-color: transparent;
@@ -36,11 +89,64 @@
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    font-size: 14px;
+    font-size: 1rem;
     line-height: 14px;
     padding: 0;
+}
+
+.skill-input{
+    background-color: transparent;
+    border: none;
+    caret-color: #2986d6;
+}
+
+.skill-input:focus, .skill-input:focus-visible, .skill-input:focus-within{
+    outline: none;
 }
 
 .remove-tag:focus{
     border: 1px solid black;
 }
+
+.skill-search{
+    padding: 0 10px;
+    margin-top: 10px;
+    border: 1px solid #2986d6;
+    border-radius: 4px;
+
+
+}
+.search-item{
+    font-size: 1rem;
+    line-height: 2rem;
+    color: black;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .form-wrapper{
+        padding: 1.5rem;
+    }
+    .resume-title{
+        font-size: 2.5rem;
+    }
+    .block-title{
+        font-size: 1.4rem;
+    }
+    .custom-label {
+       font-size: 1rem;
+    }
+    .custom-button{
+        font-size: 1rem;
+    }
+    .custom-input{
+        font-size: 1rem;
+    }
+    .field-wrapper{
+        width: 100%;
+    }
+    .wrapper{
+        column-gap: 0;
+    }
+}
+

@@ -2,4 +2,7 @@
 .app{
     width: 100%;
     height: 100vh;
+    background: rgb(254,241,250);
+    background: linear-gradient(142deg, rgba(254,241,250,1) 0%, rgba(179,217,250,1) 100%);
+    overflow: auto;
 }

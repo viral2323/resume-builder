@@ -1,8 +1,7 @@
-import React, {useState} from "react";
-import Input from "./CommonInputField";
+import React, {useEffect, useState} from "react";
 
-const skill = [
-    'React js', 'Next js','HTML',"CSS","Javascript","Aws","Digital Marketing","Node js","Mongodb","Nest Js","Express Js","Boostrap","Material UI"
+const staticSkill = [
+    'React js', 'Next js', 'HTML', "CSS", "Javascript", "Aws", "Digital Marketing", "Node js", "Mongodb", "Nest Js", "Express Js", "Boostrap", "Material UI"
 ]
 export default function SkillBlock(props) {
     // stats
@@ -12,49 +11,81 @@ export default function SkillBlock(props) {
     const {changeValue} = props;
 
     // handlers
+
+    useEffect(() => {
+        filterSkill()
+    },[inputValue, skills])
     const handleChange = (e) => {
-    setInputValue(e.target.value)
+        setInputValue(e.target.value)
+
     }
 
-    const handleAddSkills = (e) => {
-        if(e.which === 13){
+    const filterSkill = () => {
+        const findSkill = staticSkill.filter((skill) => {
+            return inputValue && skill.toLowerCase().includes(inputValue.toLowerCase())
+        })
+        const filteredSkill = findSkill.filter((skill) => {
+            return !skills.includes(skill)
+        })
+        setFilteredSkill([...filteredSkill])
+
+    }
+
+    const handleAddSkills = (e, field) => {
+        if (field == 'input' && e.which === 13) {
+            const isBlank = /^\s*$/.test(inputValue)
+            if (isBlank) return
             const skillAlreadyIncluded = skills.includes(inputValue)
-            if(skillAlreadyIncluded) return
+            if (skillAlreadyIncluded) return
             setSkills([...skills, inputValue])
             setInputValue('')
+        }else if(field !== 'input'){
+            const skillAlreadyIncluded = skills.includes(field)
+            if (skillAlreadyIncluded) return
+            setSkills([...skills, field])
         }
     }
 
     const handleRemoveSkill = (skill, index) => {
-       const updateSkills =  skills.filter((tag) => {
+        const updateSkills = skills.filter((tag) => {
             return skill != tag;
         })
-
         setSkills([...updateSkills])
+        filterSkill()
     }
 
     return (
         <>
             <fieldset className='education-block-wrapper w-100 p-2'>
-                <legend className='w-auto'>Skill</legend>
+                <legend className='block-title w-auto'>Skill</legend>
                 <div className='overflow-auto'>
 
                     <div className='skill-tag-wrapper'>
                         {
                             skills.map((skill, index) => {
-                                return(
+                                return (
                                     <>
-                                        <span key={index} className='tag'>{skill}<button className='remove-tag' onClick={() => handleRemoveSkill(skill,index)}>X</button></span>
+                                        <span key={index} className='tag'>{skill}
+                                            <button className='remove-tag'
+                                                    onClick={() => handleRemoveSkill(skill, index)}>X</button></span>
                                     </>
 
                                 )
                             })
                         }
-                        <input type='text' onChange={handleChange} onKeyDown={handleAddSkills} value={inputValue}/>
+                        <input type='text' className='skill-input' style={{width: skills.length > 0 ? '60%' : '100%'}}
+                               onChange={handleChange} onKeyDown={(e) => handleAddSkills(e,'input')} value={inputValue}/>
                     </div>
-                    <div>
-                        {}
-                    </div>
+                    {filteredSkill.length > 0 && <div className='skill-search'>
+                        {
+                            filteredSkill.map((skill) => {
+                                return (<div className='search-item' onClick={(e) =>handleAddSkills(e,skill)}>
+                                    <span>{skill}</span>
+                                    <hr className='m-0'/>
+                                </div>)
+                            })
+                        }
+                    </div>}
                 </div>
             </fieldset>
         </>

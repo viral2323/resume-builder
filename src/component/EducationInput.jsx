@@ -5,25 +5,14 @@ import Input from "./CommonInputField";
 const EducationCommonBlock = (props) => {
     const {changeValue} = props;
 
-    return(
+    return (
         <>
-            <div className='d-flex flex-column mb-3'>
-                <label>Institute Name</label>
-                <Input type='text' changeValue={changeValue} placeholder='Enter your institute name'
-                       value={''}/>
-            </div>
-            <div className='d-flex flex-column mb-3'>
-                <label>Completion year</label>
-                <Input type='text' changeValue={changeValue} placeholder='Enter your institute name'
-                       value={''}/>
-            </div>
-
-            <div className='d-flex flex-column mb-3'>
-                <label>Course Details</label>
-                <Input type='text' changeValue={changeValue} placeholder='Enter your institute name'
-                       value={''}/>
-            </div>
-            <hr/>
+            <Input label="Institute Name" type='text' changeValue={changeValue} placeholder='Enter your institute name'
+                   value={''}/>
+            <Input label="Completion year" type='text' changeValue={changeValue} placeholder='Enter your institute name'
+                   value={''}/>
+            <Input label="Course Details" type='text' changeValue={changeValue} placeholder='Enter your institute name'
+                   value={''}/>
         </>
     )
 }
@@ -40,15 +29,20 @@ export default function EducationBlock(props) {
     return (
         <>
             <fieldset className='education-block-wrapper w-100 p-2'>
-                <legend className='w-auto'>Education Details</legend>
-                <div className='overflow-auto'>
+                <legend className='block-title w-auto'>Education Details</legend>
 
-                    {Array.from({ length: educationList }).map((_, index) => (
-                        <EducationCommonBlock key={index} changeValue={changeValue}/>
-                    ))}
-                    <div>
-                        <button onClick={addEducationDetailBlock}>Add more Education Details</button>
-                    </div>
+                {Array.from({length: educationList}).map((_, index) => (
+                    <>
+                        <div className='wrapper overflow-auto d-flex flex-wrap'>
+                            <EducationCommonBlock key={index} changeValue={changeValue}/>
+                        </div>
+                        <hr/>
+                    </>
+                ))}
+
+                <div className='pt-2 pb-2'>
+                    <button className='custom-button' onClick={addEducationDetailBlock}>Add more Education Details
+                    </button>
                 </div>
             </fieldset>
         </>

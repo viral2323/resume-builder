@@ -8,40 +8,36 @@ export default function Form() {
     const handleChange = () => {
 
     }
-
     return (
-        <div className='d-flex flex-column justify-content-start align-items-center p-4 border-danger w-100 h-100'>
-            <p className='text-capitalize'>Create Resume</p>
+        <div className='form-wrapper d-flex flex-column justify-content-start align-items-center  border-danger w-100 h-100'>
+            <p className='resume-title text-capitalize'>Create Resume</p>
             <p></p>
             <fieldset className='personal-block-wrapper w-100 p-2'>
-                <legend className='w-auto'>Personal Details</legend>
-                <div className='overflow-auto'>
+                <legend className='block-title w-auto'>Personal Details</legend>
+                <div className='wrapper overflow-auto d-flex flex-wrap'>
 
-                    <div className='d-flex flex-column mb-3'>
-                        <label>First Name</label>
-                        <Input type='text' changeValue={handleChange} placeholder='Enter your first name' value={''}/>
-                    </div>
-                    <div className='d-flex flex-column mb-3'>
-                        <label>Last Name</label>
-                        <Input type='text' changeValue={handleChange} placeholder='Enter your last name' value={''}/>
-                    </div>
-                    <div className='d-flex flex-column mb-3'>
-                        <label>Email Address</label>
-                        <Input type='text' changeValue={handleChange} placeholder='Enter your active email address'
-                               value={''}/>
-                    </div>
-                    <div className='d-flex flex-column mb-3'>
-                        <label>Mobile Number</label>
-                        <Input type='text' changeValue={handleChange} placeholder='Enter your mobile number'
-                               value={''}/>
-                    </div>
+                    <Input label='First Name' type='text' changeValue={handleChange}
+                           placeholder='Enter your first name'/>
 
+                    <Input label="Last Name" type='text' changeValue={handleChange} placeholder='Enter your last name'
+                           value={''}/>
+
+                    <Input label="Email Address" type='text' changeValue={handleChange}
+                           placeholder='Enter your active email address'
+                           value={''}/>
+                    <Input label="Mobile Number" type='text' changeValue={handleChange}
+                           placeholder='Enter your mobile number'
+                           value={''}/>
 
                 </div>
             </fieldset>
+
             <EducationBlock changeValue={handleChange}/>
             <ExperienceBlock changeValue={handleChange}/>
             <SkillBlock changeValue={handleChange}/>
+            <div className='w-100'>
+                <button className='submit-button w-100 mt-4 mb-4' type='button'>Submit</button>
+            </div>
         </div>
 
     )
