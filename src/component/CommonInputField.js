@@ -2,7 +2,7 @@ import React from "react";
 
 
 export default function Input(props){
-    const {type, placeholder, value,changeValue, classes,label} = props;
+    const {type, placeholder, value,changeValue, classes,label, name} = props;
 
     return(
         <div className={`d-flex flex-column ${type == 'checkbox' ? '' : 'field-wrapper  mb-3'}`}>
@@ -12,6 +12,7 @@ export default function Input(props){
                    value={value}
                    onChange={changeValue}
                    className={`${classes} custom-input pl-2`}
+                   name={name}
             />
         </div>
     )

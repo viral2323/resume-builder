@@ -3,8 +3,12 @@ import Input from "./CommonInputField";
 import EducationBlock from "./EducationInput";
 import ExperienceBlock from "./ExperinceInput";
 import SkillBlock from "./SkillInput";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Form() {
+    const resumeData = useSelector((state) => state.form)
+    const dispatch = useDispatch()
+    const {firstName, lastName, email, mobileNumber, education, experience,skills} = resumeData;
     const handleChange = () => {
 
     }
@@ -17,24 +21,24 @@ export default function Form() {
                 <div className='wrapper overflow-auto d-flex flex-wrap'>
 
                     <Input label='First Name' type='text' changeValue={handleChange}
-                           placeholder='Enter your first name'/>
+                           placeholder='Enter your first name' value={firstName}/>
 
                     <Input label="Last Name" type='text' changeValue={handleChange} placeholder='Enter your last name'
-                           value={''}/>
+                           value={lastName}/>
 
                     <Input label="Email Address" type='text' changeValue={handleChange}
                            placeholder='Enter your active email address'
-                           value={''}/>
+                           value={email}/>
                     <Input label="Mobile Number" type='text' changeValue={handleChange}
                            placeholder='Enter your mobile number'
-                           value={''}/>
+                           value={mobileNumber}/>
 
                 </div>
             </fieldset>
 
-            <EducationBlock changeValue={handleChange}/>
-            <ExperienceBlock changeValue={handleChange}/>
-            <SkillBlock changeValue={handleChange}/>
+            <EducationBlock changeValue={dispatch} data={education}/>
+            <ExperienceBlock changeValue={dispatch} data={experience}/>
+            <SkillBlock changeValue={dispatch} data={skills}/>
             <div className='w-100'>
                 <button className='submit-button w-100 mt-4 mb-4' type='button'>Submit</button>
             </div>

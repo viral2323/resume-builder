@@ -3,26 +3,33 @@ import Input from "./CommonInputField";
 
 
 const EducationCommonBlock = (props) => {
-    const {changeValue} = props;
-
+    const [educationData, setEducationData] = useState({})
+    const {changeValue, id} = props;
+    const handleChangeValue = (e,id) => {
+        const updateData = {...educationData,id: id, [e.target.name]: e.target.value}
+        changeValue('ADD_EDUCATION',updateData)
+    }
     return (
         <>
-            <Input label="Institute Name" type='text' changeValue={changeValue} placeholder='Enter your institute name'
-                   value={''}/>
-            <Input label="Completion year" type='text' changeValue={changeValue} placeholder='Enter your institute name'
-                   value={''}/>
-            <Input label="Course Details" type='text' changeValue={changeValue} placeholder='Enter your institute name'
-                   value={''}/>
+            <Input label="Institute Name" type='text' changeValue={(e) => handleChangeValue(e,id)} placeholder='Enter your institute name'
+                   value={educationData?.instituteName} name='instituteName'/>
+            <Input label="Completion year" type='text' changeValue={(e) => handleChangeValue(e,id)} placeholder='Enter your institute name'
+                   value={educationData?.passingYear} name='passingYear'/>
+            <Input label="Course Details" type='text' changeValue={(e) => handleChangeValue(e,id)} placeholder='Enter your institute name'
+                   value={educationData?.course} name='course'/>
         </>
     )
 }
 export default function EducationBlock(props) {
     // stats
+    const [educationData, setEducationData] = useState({})
     const [educationList, setEducationList] = useState(1)
-    const {changeValue} = props;
-
+    const {changeValue,data} = props;
     // handlers
 
+    const handleChangeValue = (e,id) => {
+        setEducationData({...educationData,id: id, [e.target.name]: e.target.value})
+    }
     const addEducationDetailBlock = () => {
         setEducationList(educationList + 1);
     }
@@ -34,7 +41,7 @@ export default function EducationBlock(props) {
                 {Array.from({length: educationList}).map((_, index) => (
                     <>
                         <div className='wrapper overflow-auto d-flex flex-wrap'>
-                            <EducationCommonBlock key={index} changeValue={changeValue}/>
+                            <EducationCommonBlock key={index} id={0 + index} changeValue={changeValue} educationData={educationData}/>
                         </div>
                         <hr/>
                     </>

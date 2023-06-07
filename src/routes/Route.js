@@ -1,15 +1,16 @@
 import {createBrowserRouter} from 'react-router-dom'
 import Form from "../component/Form";
+import ViewResume from "../component/Resume";
 
 const router = createBrowserRouter([
     {
         path: '/create-resume',
         element: <Form/>,
     },
-    // {
-    //     path: '/login',
-    //     element: <Login/>
-    // },
+    {
+        path: '/',
+        element: <ViewResume/>
+    },
     // {
     //     path:'/admin',
     //     element: <PrivatRoute><AdminLayout/></PrivatRoute>,

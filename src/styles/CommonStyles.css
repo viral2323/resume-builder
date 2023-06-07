@@ -150,3 +150,8 @@
     }
 }
 
+/*view resume style*/
+
+.view-field-wrapper{
+    column-gap: 30px;
+}
