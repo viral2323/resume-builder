@@ -9,6 +9,7 @@ export default function Form() {
     const resumeData = useSelector((state) => state.form)
     const dispatch = useDispatch()
     const {firstName, lastName, email, mobileNumber, education, experience,skills} = resumeData;
+    console.log('data',resumeData)
     const handleChange = () => {
 
     }

@@ -3,23 +3,8 @@ const initialState = {
     lastName: '',
     email: '',
     mobileNumber: '',
-    education: [
-        {
-            id: '',
-            instituteName: '',
-            passingYear: '',
-            course: ''
-        }
-    ],
-    experience: [
-        {
-            id:'',
-            companyName:'',
-            experience: '',
-            designation: '',
-            currentWorking: '',
-        }
-    ],
+    education: [],
+    experience: [],
     skills: []
 
 }
@@ -49,9 +34,9 @@ const formReducer = (state = initialState, action) => {
             const filterData =  state.education.filter((item) => {
                 return item.id != action.payload.id;
             });
+
             return {
                 ...state,
-
                 education: [...filterData, action.payload]
             };
         case 'UPDATE_EDUCATION':
@@ -64,7 +49,7 @@ const formReducer = (state = initialState, action) => {
         case 'DELETE_EDUCATION':
             return {
                 ...state,
-                education: state.education.filter((edu, index) => index !== action.payload)
+                education: state.education.filter((edu, index) => edu.id !== action.payload)
             };
         case 'ADD_EXPERIENCE':
             return {

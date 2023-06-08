@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Input from "./CommonInputField";
+import {addEducation, deleteEducation} from "../redux/actions/FormAction";
 
 
 const EducationCommonBlock = (props) => {
@@ -7,42 +8,48 @@ const EducationCommonBlock = (props) => {
     const {changeValue, id} = props;
     const handleChangeValue = (e,id) => {
         const updateData = {...educationData,id: id, [e.target.name]: e.target.value}
-        changeValue('ADD_EDUCATION',updateData)
+        changeValue(addEducation(updateData))
+        setEducationData(updateData)
     }
     return (
         <>
             <Input label="Institute Name" type='text' changeValue={(e) => handleChangeValue(e,id)} placeholder='Enter your institute name'
-                   value={educationData?.instituteName} name='instituteName'/>
+                   value={educationData?.instituteName || ""} name='instituteName'/>
             <Input label="Completion year" type='text' changeValue={(e) => handleChangeValue(e,id)} placeholder='Enter your institute name'
-                   value={educationData?.passingYear} name='passingYear'/>
+                   value={educationData?.passingYear || ""} name='passingYear'/>
             <Input label="Course Details" type='text' changeValue={(e) => handleChangeValue(e,id)} placeholder='Enter your institute name'
-                   value={educationData?.course} name='course'/>
+                   value={educationData?.course || ""} name='course'/>
         </>
     )
 }
 export default function EducationBlock(props) {
     // stats
     const [educationData, setEducationData] = useState({})
-    const [educationList, setEducationList] = useState(1)
+    const [educationList, setEducationList] = useState([1])
     const {changeValue,data} = props;
     // handlers
-
-    const handleChangeValue = (e,id) => {
-        setEducationData({...educationData,id: id, [e.target.name]: e.target.value})
-    }
     const addEducationDetailBlock = () => {
-        setEducationList(educationList + 1);
+        const nextNumber = educationList[educationList.length] + 1;
+        setEducationList([...educationList, nextNumber]);
     }
+
+    const deleteEducationBlock = (index) => {
+        changeValue(deleteEducation(index))
+
+    }
+
     return (
         <>
             <fieldset className='education-block-wrapper w-100 p-2'>
                 <legend className='block-title w-auto'>Education Details</legend>
 
-                {Array.from({length: educationList}).map((_, index) => (
+                {educationList.map((item, index) => (
+
                     <>
                         <div className='wrapper overflow-auto d-flex flex-wrap'>
-                            <EducationCommonBlock key={index} id={0 + index} changeValue={changeValue} educationData={educationData}/>
+                            <EducationCommonBlock key={item} id={item} changeValue={changeValue} educationData={educationData}/>
                         </div>
+                        <button className='custom-button' onClick={() => deleteEducationBlock(item)}>Delete</button>
                         <hr/>
                     </>
                 ))}
