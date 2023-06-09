@@ -4,14 +4,16 @@ import EducationBlock from "./EducationInput";
 import ExperienceBlock from "./ExperinceInput";
 import SkillBlock from "./SkillInput";
 import {useDispatch, useSelector} from "react-redux";
+import {updateFirstName} from "../redux/actions/FormAction";
 
 export default function Form() {
     const resumeData = useSelector((state) => state.form)
     const dispatch = useDispatch()
     const {firstName, lastName, email, mobileNumber, education, experience,skills} = resumeData;
-    console.log('data',resumeData)
-    const handleChange = () => {
 
+    const handleChange = (e) => {
+        const {name,value} = e.target
+        dispatch(updateFirstName({name: name,value: value}))
     }
     return (
         <div className='form-wrapper d-flex flex-column justify-content-start align-items-center  border-danger w-100 h-100'>
@@ -22,17 +24,19 @@ export default function Form() {
                 <div className='wrapper overflow-auto d-flex flex-wrap'>
 
                     <Input label='First Name' type='text' changeValue={handleChange}
-                           placeholder='Enter your first name' value={firstName}/>
+                           placeholder='Enter your first name' value={firstName || ''} name='firstName'/>
 
                     <Input label="Last Name" type='text' changeValue={handleChange} placeholder='Enter your last name'
-                           value={lastName}/>
+                           name='lastName' value={lastName || ''}/>
 
                     <Input label="Email Address" type='text' changeValue={handleChange}
                            placeholder='Enter your active email address'
-                           value={email}/>
+                           name='email'
+                           value={email || ''}/>
                     <Input label="Mobile Number" type='text' changeValue={handleChange}
                            placeholder='Enter your mobile number'
-                           value={mobileNumber}/>
+                           name='mobileNumber'
+                           value={mobileNumber || ''}/>
 
                 </div>
             </fieldset>

@@ -1,23 +1,28 @@
 import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {selectSkills} from "../redux/selectores/FormSelectore";
+import {addSkill, deleteSkill} from "../redux/actions/FormAction";
 
 const staticSkill = [
     'React js', 'Next js', 'HTML', "CSS", "Javascript", "Aws", "Digital Marketing", "Node js", "Mongodb", "Nest Js", "Express Js", "Boostrap", "Material UI"
 ]
 export default function SkillBlock(props) {
     // stats
+    const {changeValue} = props;
+    const skill = useSelector((state) => selectSkills(state))
+
     const [skills, setSkills] = useState([])
     const [inputValue, setInputValue] = useState('')
     const [filteredSkill, setFilteredSkill] = useState([])
-    const {changeValue} = props;
-
     // handlers
-
+    useEffect(() => {
+        setSkills([...skill])
+    }, [skill])
     useEffect(() => {
         filterSkill()
     },[inputValue, skills])
     const handleChange = (e) => {
         setInputValue(e.target.value)
-
     }
 
     const filterSkill = () => {
@@ -37,20 +42,23 @@ export default function SkillBlock(props) {
             if (isBlank) return
             const skillAlreadyIncluded = skills.includes(inputValue)
             if (skillAlreadyIncluded) return
-            setSkills([...skills, inputValue])
+            // setSkills([...skills, inputValue])
+            changeValue(addSkill(inputValue))
             setInputValue('')
         }else if(field !== 'input'){
             const skillAlreadyIncluded = skills.includes(field)
             if (skillAlreadyIncluded) return
-            setSkills([...skills, field])
+            // setSkills([...skills, field])
+            changeValue(addSkill(field))
         }
     }
 
     const handleRemoveSkill = (skill, index) => {
-        const updateSkills = skills.filter((tag) => {
-            return skill != tag;
-        })
-        setSkills([...updateSkills])
+        // const updateSkills = skills.filter((tag) => {
+        //     return skill != tag;
+        // })
+        // setSkills([...updateSkills])
+        changeValue(deleteSkill(skill))
         filterSkill()
     }
 

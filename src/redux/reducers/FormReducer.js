@@ -13,7 +13,7 @@ const formReducer = (state = initialState, action) => {
         case 'UPDATE_FIRST_NAME':
             return {
                 ...state,
-                firstName: action.payload
+                [action.payload.name]: action.payload.value
             };
         case 'UPDATE_LAST_NAME':
             return {
@@ -52,9 +52,12 @@ const formReducer = (state = initialState, action) => {
                 education: state.education.filter((edu, index) => edu.id !== action.payload)
             };
         case 'ADD_EXPERIENCE':
+            const experienceData =  state.experience.filter((item) => {
+                return item.id != action.payload.id;
+            });
             return {
                 ...state,
-                experience: [...state.experience, action.payload]
+                experience: [...experienceData, action.payload]
             };
         case 'UPDATE_EXPERIENCE':
             return {
