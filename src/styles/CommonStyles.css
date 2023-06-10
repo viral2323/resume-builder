@@ -114,13 +114,28 @@
     border: 1px solid #2986d6;
     border-radius: 4px;
 
-
 }
 .search-item{
     font-size: 1rem;
     line-height: 2rem;
     color: black;
     cursor: pointer;
+}
+
+.error-message{
+    position: fixed;
+    top: 10px;
+    background: white;
+    min-width: 300px;
+    display: flex;
+    column-gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 20px;
+    right: 0;
+    line-height: 20px;
+    box-shadow: -4px 4px 6px 0px #e83a3a;
 }
 
 @media screen and (max-width: 600px) {
@@ -147,6 +162,9 @@
     }
     .wrapper{
         column-gap: 0;
+    }
+    .error-message{
+        min-width: 100%;
     }
 }
 

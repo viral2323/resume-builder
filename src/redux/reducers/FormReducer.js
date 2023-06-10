@@ -3,8 +3,23 @@ const initialState = {
     lastName: '',
     email: '',
     mobileNumber: '',
-    education: [],
-    experience: [],
+    education: [
+        {
+            id: 1,
+            instituteName: '',
+            passingYear: '',
+            course: '',
+        }
+    ],
+    experience: [
+        {
+            id: 1,
+            companyName: '',
+            experience: '',
+            designation: '',
+            isCurrentCompany: ''
+        }
+    ],
     skills: []
 
 }

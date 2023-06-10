@@ -69,12 +69,12 @@ export default function ExperienceBlock(props) {
                         <div className='wrapper overflow-auto d-flex flex-wrap'>
                             <ExperienceCommonBlock key={item} id={item} changeValue={changeValue}/>
                         </div>
-                        <button className='custom-button' onClick={() => deleteEducationBlock(item)}>Delete</button>
+                        <button className='custom-button' type='button' onClick={() => deleteEducationBlock(item)}>Delete</button>
                         <hr/>
                     </>
                 ))}
                 <div className='pt-2 pb-2'>
-                    <button className='custom-button' onClick={addMoreExperienceDetailsBlock}>Add more Experience
+                    <button className='custom-button' type='button' onClick={addMoreExperienceDetailsBlock}>Add more Experience
                         Details
                     </button>
                 </div>

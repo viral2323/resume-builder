@@ -20,7 +20,7 @@ export default function SkillBlock(props) {
     }, [skill])
     useEffect(() => {
         filterSkill()
-    },[inputValue, skills])
+    }, [inputValue, skills])
     const handleChange = (e) => {
         setInputValue(e.target.value)
     }
@@ -45,7 +45,7 @@ export default function SkillBlock(props) {
             // setSkills([...skills, inputValue])
             changeValue(addSkill(inputValue))
             setInputValue('')
-        }else if(field !== 'input'){
+        } else if (field !== 'input') {
             const skillAlreadyIncluded = skills.includes(field)
             if (skillAlreadyIncluded) return
             // setSkills([...skills, field])
@@ -65,7 +65,7 @@ export default function SkillBlock(props) {
     return (
         <>
             <fieldset className='education-block-wrapper w-100 p-2'>
-                <legend className='block-title w-auto'>Skill</legend>
+                <legend className='block-title w-auto'>Skills</legend>
                 <div className='overflow-auto'>
 
                     <div className='skill-tag-wrapper'>
@@ -82,12 +82,13 @@ export default function SkillBlock(props) {
                             })
                         }
                         <input type='text' className='skill-input' style={{width: skills.length > 0 ? '60%' : '100%'}}
-                               onChange={handleChange} onKeyDown={(e) => handleAddSkills(e,'input')} value={inputValue}/>
+                               onChange={handleChange} onKeyDown={(e) => handleAddSkills(e, 'input')} value={inputValue}
+                               name='skills'/>
                     </div>
                     {filteredSkill.length > 0 && <div className='skill-search'>
                         {
                             filteredSkill.map((skill) => {
-                                return (<div className='search-item' onClick={(e) =>handleAddSkills(e,skill)}>
+                                return (<div className='search-item' onClick={(e) => handleAddSkills(e, skill)}>
                                     <span>{skill}</span>
                                     <hr className='m-0'/>
                                 </div>)
