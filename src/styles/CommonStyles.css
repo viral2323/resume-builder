@@ -173,3 +173,18 @@
 .view-field-wrapper{
     column-gap: 30px;
 }
+
+.view-label{
+    font-size: 20px;
+    font-weight: 500;
+    width: 50%;
+}
+
+.view-field-data{
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.separate-item{
+    border: 1px dashed #2986d6;
+}
+

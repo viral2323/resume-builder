@@ -1,3 +1,5 @@
+import { v4 as uuidv4} from 'uuid'
+
 const initialState = {
     firstName: '',
     lastName: '',
@@ -5,7 +7,7 @@ const initialState = {
     mobileNumber: '',
     education: [
         {
-            id: 1,
+            id: uuidv4(),
             instituteName: '',
             passingYear: '',
             course: '',
@@ -13,37 +15,23 @@ const initialState = {
     ],
     experience: [
         {
-            id: 1,
+            id:uuidv4(),
             companyName: '',
             experience: '',
             designation: '',
-            isCurrentCompany: ''
+            isCurrentCompany: false
         }
     ],
-    skills: []
+    skills: [],
+    isEdit: false
 
 }
 const formReducer = (state = initialState, action) => {
     switch (action.type){
-        case 'UPDATE_FIRST_NAME':
+        case 'UPDATE_PERSONAL_DETAILS':
             return {
                 ...state,
                 [action.payload.name]: action.payload.value
-            };
-        case 'UPDATE_LAST_NAME':
-            return {
-                ...state,
-                lastName: action.payload
-            };
-        case 'UPDATE_EMAIL':
-            return {
-                ...state,
-                email: action.payload
-            };
-        case 'UPDATE_MOBILE_NUMBER':
-            return {
-                ...state,
-                mobileNumber: action.payload
             };
         case 'ADD_EDUCATION':
             const filterData =  state.education.filter((item) => {
@@ -58,7 +46,7 @@ const formReducer = (state = initialState, action) => {
             return {
                 ...state,
                 education: state.education.map((edu, index) =>
-                    index === action.payload.index ? action.payload.education : edu
+                    edu.id === action.payload.id ? action.payload.education : edu
                 )
             };
         case 'DELETE_EDUCATION':
@@ -78,13 +66,13 @@ const formReducer = (state = initialState, action) => {
             return {
                 ...state,
                 experience: state.experience.map((exp, index) =>
-                    index === action.payload.index ? action.payload.experience : exp
+                    exp.id === action.payload.id ? action.payload.experience : exp
                 )
             };
         case 'DELETE_EXPERIENCE':
             return {
                 ...state,
-                experience: state.experience.filter((exp, index) => index !== action.payload)
+                experience: state.experience.filter((exp, index) => exp.id !== action.payload)
             };
         case 'ADD_SKILL':
             return {
@@ -96,6 +84,11 @@ const formReducer = (state = initialState, action) => {
                 ...state,
                 skills: state.skills.filter(skill => skill !== action.payload)
             };
+        case 'EDIT_FORM':
+            return {
+                ...state,
+                isEdit: action.payload
+            }
         default:
             return state;
     }

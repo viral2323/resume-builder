@@ -1,8 +1,5 @@
 // Action types
-export const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME';
-export const UPDATE_LAST_NAME = 'UPDATE_LAST_NAME';
-export const UPDATE_EMAIL = 'UPDATE_EMAIL';
-export const UPDATE_MOBILE_NUMBER = 'UPDATE_MOBILE_NUMBER';
+export const UPDATE_PERSONAL_DETAILS = 'UPDATE_PERSONAL_DETAILS';
 export const ADD_EDUCATION = 'ADD_EDUCATION';
 export const UPDATE_EDUCATION = 'UPDATE_EDUCATION';
 export const DELETE_EDUCATION = 'DELETE_EDUCATION';
@@ -11,33 +8,13 @@ export const UPDATE_EXPERIENCE = 'UPDATE_EXPERIENCE';
 export const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
 export const ADD_SKILL = 'ADD_SKILL';
 export const DELETE_SKILL = 'DELETE_SKILL';
+export const EDIT_FORM = 'EDIT_FORM';
 
 // Action creators
-export const updateFirstName = (firstName) => {
+export const updatePersonalDetails = (firstName) => {
     return {
-        type: UPDATE_FIRST_NAME,
+        type: UPDATE_PERSONAL_DETAILS,
         payload: firstName
-    };
-};
-
-export const updateLastName = (lastName) => {
-    return {
-        type: UPDATE_LAST_NAME,
-        payload: lastName
-    };
-};
-
-export const updateEmail = (email) => {
-    return {
-        type: UPDATE_EMAIL,
-        payload: email
-    };
-};
-
-export const updateMobileNumber = (mobileNumber) => {
-    return {
-        type: UPDATE_MOBILE_NUMBER,
-        payload: mobileNumber
     };
 };
 
@@ -96,3 +73,10 @@ export const deleteSkill = (skill) => {
         payload: skill
     };
 };
+
+export const editForm = (edit) => {
+    return {
+        type: EDIT_FORM,
+        payload: edit
+    }
+}

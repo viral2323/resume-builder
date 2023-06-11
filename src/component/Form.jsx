@@ -4,19 +4,21 @@ import EducationBlock from "./EducationInput";
 import ExperienceBlock from "./ExperinceInput";
 import SkillBlock from "./SkillInput";
 import {useDispatch, useSelector} from "react-redux";
-import {updateFirstName} from "../redux/actions/FormAction";
+import {editForm, updatePersonalDetails} from "../redux/actions/FormAction";
 import {createPortal} from "react-dom";
 import Error from "./ErrorMessage";
+import {useNavigate} from "react-router-dom";
 
 export default function Form() {
     const resumeData = useSelector((state) => state.form)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [showRequiredMessage,setShowRequiredMessage] = useState(false)
     const {firstName, lastName, email, mobileNumber, education, experience, skills} = resumeData;
 
     const handleChange = (e) => {
         const {name, value} = e.target
-        dispatch(updateFirstName({name: name, value: value}))
+        dispatch(updatePersonalDetails({name: name, value: value}))
 
     }
     const submitResume = () => {
@@ -29,7 +31,12 @@ export default function Form() {
             }
             return value === '';
         });
+        if(!isAnyFieldBlank) {
+            dispatch(editForm(false))
+            navigate('/view-resume')
+        }
         setShowRequiredMessage(isAnyFieldBlank)
+
     }
 
     const closeErrorModal = () => {
@@ -46,7 +53,7 @@ export default function Form() {
         <form>
             <div
                 className='form-wrapper d-flex flex-column justify-content-start align-items-center  border-danger w-100 h-100'>
-                <p className='resume-title text-capitalize'>Create Resume</p>
+                <p className='resume-title text-capitalize'>{resumeData.isEdit ? "Edit Resume" : "Create Resume"}</p>
                 <p></p>
                 <fieldset className='personal-block-wrapper w-100 p-2'>
                     <legend className='block-title w-auto'>Personal Details</legend>
@@ -70,7 +77,6 @@ export default function Form() {
 
                     </div>
                 </fieldset>
-
                 <EducationBlock changeValue={dispatch} data={education} />
                 <ExperienceBlock changeValue={dispatch} data={experience} />
                 <SkillBlock changeValue={dispatch} data={skills} />

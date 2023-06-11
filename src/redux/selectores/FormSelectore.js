@@ -11,3 +11,11 @@ export const selectExperienceById = (state, id) => {
 export const selectSkills = (state) => {
     return state.form.skills;
 }
+
+export const selectExperienceData = (state) => {
+    return state.form.experience;
+}
+
+export const selectEducationData = (state) => {
+    return state.form.education;
+}

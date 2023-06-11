@@ -2,10 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {selectSkills} from "../redux/selectores/FormSelectore";
 import {addSkill, deleteSkill} from "../redux/actions/FormAction";
+import {staticSkills} from "./enum";
 
-const staticSkill = [
-    'React js', 'Next js', 'HTML', "CSS", "Javascript", "Aws", "Digital Marketing", "Node js", "Mongodb", "Nest Js", "Express Js", "Boostrap", "Material UI"
-]
+
 export default function SkillBlock(props) {
     // stats
     const {changeValue} = props;
@@ -26,7 +25,7 @@ export default function SkillBlock(props) {
     }
 
     const filterSkill = () => {
-        const findSkill = staticSkill.filter((skill) => {
+        const findSkill = staticSkills.filter((skill) => {
             return inputValue && skill.toLowerCase().includes(inputValue.toLowerCase())
         })
         const filteredSkill = findSkill.filter((skill) => {
@@ -38,26 +37,23 @@ export default function SkillBlock(props) {
 
     const handleAddSkills = (e, field) => {
         if (field == 'input' && e.which === 13) {
+            e.preventDefault()
             const isBlank = /^\s*$/.test(inputValue)
             if (isBlank) return
             const skillAlreadyIncluded = skills.includes(inputValue)
             if (skillAlreadyIncluded) return
-            // setSkills([...skills, inputValue])
+
             changeValue(addSkill(inputValue))
             setInputValue('')
         } else if (field !== 'input') {
             const skillAlreadyIncluded = skills.includes(field)
             if (skillAlreadyIncluded) return
-            // setSkills([...skills, field])
+
             changeValue(addSkill(field))
         }
     }
 
-    const handleRemoveSkill = (skill, index) => {
-        // const updateSkills = skills.filter((tag) => {
-        //     return skill != tag;
-        // })
-        // setSkills([...updateSkills])
+    const handleRemoveSkill = (skill) => {
         changeValue(deleteSkill(skill))
         filterSkill()
     }
@@ -74,7 +70,7 @@ export default function SkillBlock(props) {
                                 return (
                                     <>
                                         <span key={index} className='tag'>{skill}
-                                            <button className='remove-tag'
+                                            <button className='remove-tag' type='button'
                                                     onClick={() => handleRemoveSkill(skill, index)}>X</button></span>
                                     </>
 

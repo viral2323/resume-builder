@@ -1,24 +1,25 @@
-import React, {useState} from "react";
+import React from "react";
 import Input from "./CommonInputField";
-import {addEducation, addExperience, deleteEducation} from "../redux/actions/FormAction";
+import {addExperience, deleteExperience, updateExperience} from "../redux/actions/FormAction";
 import {useSelector} from "react-redux";
-import {selectExperienceById} from "../redux/selectores/FormSelectore";
+import {selectExperienceById, selectExperienceData} from "../redux/selectores/FormSelectore";
+import {v4 as uuidv4} from 'uuid';
 
 
 const ExperienceCommonBlock = (props) => {
     const {changeValue, id} = props;
-    const [experienceData, setExperienceData] = useState({})
     const data = useSelector((state) => selectExperienceById(state,id))
     const handleChangeValue = (e) => {
         let updateData;
+
         if(e.target.name == 'isCurrentCompany'){
-            updateData = {...experienceData,id: id, [e.target.name]: e.target.checked}
+            updateData = {...data, [e.target.name]: e.target.checked}
 
         }else{
-            updateData = {...experienceData,id: id, [e.target.name]: e.target.value}
+            updateData = {...data, [e.target.name]: e.target.value}
         }
-        changeValue(addExperience(updateData))
-        setExperienceData(updateData)
+
+        changeValue(updateExperience({id: data.id,experience:updateData }))
     }
     return (
         <>
@@ -34,42 +35,37 @@ const ExperienceCommonBlock = (props) => {
                 <div className='d-flex flex-row-reverse justify-content-end align-items-center'>
                 <label className='custom-label pl-3 mb-0'>Currently you are working their?</label>
                 <Input classes='custom-checkbox' type='checkbox' changeValue={handleChangeValue}
-                       value={data?.isCurrentCompany ||''} name='isCurrentCompany'/>
+                       checked={data?.isCurrentCompany ||''} name='isCurrentCompany'/>
                 </div>
             </div>
         </>
     )
 }
 export default function ExperienceBlock(props) {
+
     // states
     const {changeValue} = props;
-    const [experienceList, setExperienceList] = useState([1])
+    const experience = useSelector(state => selectExperienceData(state))
 
     // handlers
-
     const addMoreExperienceDetailsBlock = () => {
-        const nextNumber = experienceList[experienceList.length - 1] ?? 0;
-        setExperienceList([...experienceList, nextNumber + 1]);
-
+        changeValue(addExperience({id: uuidv4(), companyName: '',experience: '', designation: '', isCurrentCompany: false}))
     }
 
     const deleteEducationBlock = (index) => {
-        changeValue(deleteEducation(index))
-        const revisedList = experienceList.filter((item) => {
-            return item != index
-        })
-        setExperienceList([...revisedList])
+        changeValue(deleteExperience(index))
     }
+
     return (
         <>
             <fieldset className='education-block-wrapper w-100 p-2'>
                 <legend className='block-title w-auto'>Experience Details</legend>
-                {experienceList.map((item) => (
+                {experience.map((exp) => (
                     <>
                         <div className='wrapper overflow-auto d-flex flex-wrap'>
-                            <ExperienceCommonBlock key={item} id={item} changeValue={changeValue}/>
+                            <ExperienceCommonBlock key={exp.id} id={exp.id} changeValue={changeValue}/>
                         </div>
-                        <button className='custom-button' type='button' onClick={() => deleteEducationBlock(item)}>Delete</button>
+                        <button className='custom-button' type='button' onClick={() => deleteEducationBlock(exp.id)}>Delete</button>
                         <hr/>
                     </>
                 ))}
